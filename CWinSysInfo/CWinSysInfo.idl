@@ -1,0 +1,18 @@
+// CWinSysInfo.idl : IDL source for CWinSysInfo
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CWinSysInfo.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(7812BA73-C995-48B0-A9C6-C8D6790A5FFB),
+	version(1.0),
+]
+library CWinSysInfoLib
+{
+	importlib("stdole2.tlb");
+};
+
