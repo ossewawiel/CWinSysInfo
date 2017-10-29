@@ -7,6 +7,30 @@
 import "oaidl.idl";
 import "ocidl.idl";
 
+typedef [public, v1_enum] enum eComputerNameFormat
+{
+	NetBIOS,
+	DnsHostname,
+	DnsDomain,
+	DnsFullyQualified,
+	PhysicalNetBIOS,
+	PhysicalDnsHostname,
+	PhysicalDnsDomain,
+	PhysicalDnsFullyQualified,
+	Max
+} eComputerNameFormat;
+[
+	object,
+	uuid(5E7B111E-546C-4886-933E-5FC8A7F7D27D),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ICSysInfo : IDispatch{
+	[propget, id(1)] HRESULT CeipIsOptedIn([out, retval] SHORT* pVal);
+	[id(2)] HRESULT GetComputerNameEx([in] eComputerNameFormat nameFormat, [out, retval] BSTR* pbsComputerName);
+	[id(3)] HRESULT DnsHostnameToComputerName([in] BSTR bsHostName, [out, retval] BSTR* pbsComputerName);
+};
 [
 	uuid(7812BA73-C995-48B0-A9C6-C8D6790A5FFB),
 	version(1.0),
@@ -14,5 +38,12 @@ import "ocidl.idl";
 library CWinSysInfoLib
 {
 	importlib("stdole2.tlb");
+	[
+		uuid(F0F1F05B-ECC1-43DB-ACF6-F66DA9D996A1)		
+	]
+	coclass CSysInfo
+	{
+		[default] interface ICSysInfo;
+	};
 };
 

@@ -34,6 +34,12 @@
     <ClCompile Include="CWinSysInfo_i.c">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="CSysInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -54,6 +60,12 @@
     <ClInclude Include="CWinSysInfo_i.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="CSysInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CWinSysInfo.rc">
@@ -69,6 +81,9 @@
     </None>
     <None Include="CWinSysInfo.def">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="CSysInfo.rgs">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
