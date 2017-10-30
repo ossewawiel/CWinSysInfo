@@ -111,6 +111,7 @@
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\CWinSysInfo.def</ModuleDefinitionFile>
       <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>Secur32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -174,6 +175,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <RegisterOutput>true</RegisterOutput>
+      <AdditionalDependencies>Secur32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -209,7 +211,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CHwProfileInfo.cpp" />
     <ClCompile Include="CSysInfo.cpp" />
+    <ClCompile Include="CSystemInfo.cpp" />
     <ClCompile Include="CWinSysInfo.cpp" />
     <ClCompile Include="CWinSysInfo_i.c">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -262,7 +266,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CHwProfileInfo.h" />
     <ClInclude Include="CSysInfo.h" />
+    <ClInclude Include="CSystemInfo.h" />
     <ClInclude Include="CWinSysInfo_i.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="Resource.h" />
@@ -278,7 +284,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CHwProfileInfo.rgs" />
     <None Include="CSysInfo.rgs" />
+    <None Include="CSystemInfo.rgs" />
     <None Include="CWinSysInfo.def" />
     <None Include="CWinSysInfo.rgs" />
   </ItemGroup>

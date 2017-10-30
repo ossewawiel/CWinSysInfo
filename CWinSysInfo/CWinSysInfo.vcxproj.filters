@@ -40,6 +40,12 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CHwProfileInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSystemInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -66,6 +72,12 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CHwProfileInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSystemInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CWinSysInfo.rc">
@@ -83,6 +95,12 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="CSysInfo.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CHwProfileInfo.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CSystemInfo.rgs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -18,6 +18,7 @@
 
 
 #define ATL_NO_ASSERT_ON_DESTROY_NONEXISTENT_WINDOW
+#define SECURITY_WIN32
 
 #include "resource.h"
 #include <atlbase.h>
@@ -25,3 +26,4 @@
 #include <atlctl.h>
 #include <Windowsceip.h>
 #include <comdef.h>
+#include <security.h>

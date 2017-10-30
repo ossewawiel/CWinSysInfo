@@ -9,16 +9,64 @@ import "ocidl.idl";
 
 typedef [public, v1_enum] enum eComputerNameFormat
 {
-	NetBIOS,
-	DnsHostname,
-	DnsDomain,
-	DnsFullyQualified,
-	PhysicalNetBIOS,
-	PhysicalDnsHostname,
-	PhysicalDnsDomain,
-	PhysicalDnsFullyQualified,
-	Max
+	  cnfNetBIOS
+	, cnfDnsHostname
+	, cnfDnsDomain
+	, cnfDnsFullyQualified
+	, cnfPhysicalNetBIOS
+	, cnfPhysicalDnsHostname
+	, cnfPhysicalDnsDomain
+	, cnfPhysicalDnsFullyQualified
+	, cnfMax
 } eComputerNameFormat;
+
+typedef[public, v1_enum] enum eExtendedNameFormat
+{
+	enfUnknown = 0x0
+	, enfFullyQualifiedDN = 0x1
+	, enfSamCompatible = 0x2
+	, enfDisplay = 0x3
+	, enfUniqueId = 0x6
+	, enfCanonical = 0x7
+	, enfUserPrincipal = 0x8
+	, enfCanonicalEx = 0x9
+	, enfServicePrincipal = 0xA
+	, enfDnsDomain = 0xC
+} eExtendedNameFormat;
+[
+	object,
+	uuid(3B06FFC2-C5DD-43DA-80B2-C55A4C073F09),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ICHwProfileInfo : IDispatch {
+	[propget, id(1)] HRESULT DockInfo([out, retval] ULONG* pVal);
+	[propget, id(2)] HRESULT HwProfileGuid([out, retval] BSTR* pVal);
+	[propget, id(3)] HRESULT HwProfileName([out, retval] BSTR* pVal);
+	[id(4)] HRESULT Initialise([in] ULONG ulDockInfo, [in] BSTR bsHwProfileGuid, [in] BSTR bsHwProfileName);
+};
+[
+	object,
+	uuid(10108165-BC7D-4C2D-AC63-C76DCDE78920),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ICSystemInfo : IDispatch {
+	[id(1)] HRESULT Initialise([in] ULONG ulOemId, [in] USHORT usProcessorArchitecture, [in] ULONG ulPageSize, [in] ULONG ulMinimumApplicationAddress, [in] ULONG ulMaximumApplicationAddress, [in] ULONG ulActiveProcessorMask, [in] ULONG ulNumberOfProcessors, [in] ULONG ulProcessorType, [in] ULONG ulAllocationGranularity, [in] USHORT usProcessorLevel, [in] USHORT usProcessorRevision);
+	[propget, id(2)] HRESULT OemId([out, retval] ULONG* pVal);
+	[propget, id(3)] HRESULT ProcessorArchitecture([out, retval] USHORT* pVal);
+	[propget, id(4)] HRESULT PageSize([out, retval] ULONG* pVal);
+	[propget, id(5)] HRESULT MinimumApplicationAddress([out, retval] ULONG* pVal);
+	[propget, id(6)] HRESULT MaximumApplicationAddress([out, retval] ULONG* pVal);
+	[propget, id(7)] HRESULT ActiveProcessorMask([out, retval] ULONG* pVal);
+	[propget, id(8)] HRESULT NumberOfProcessors([out, retval] ULONG* pVal);
+	[propget, id(9)] HRESULT ProcessorType([out, retval] ULONG* pVal);
+	[propget, id(10)] HRESULT AllocationGranularity([out, retval] ULONG* pVal);
+	[propget, id(11)] HRESULT ProcessorLevel([out, retval] USHORT* pVal);
+	[propget, id(12)] HRESULT ProcessorRevision([out, retval] USHORT* pVal);
+};
 [
 	object,
 	uuid(5E7B111E-546C-4886-933E-5FC8A7F7D27D),
@@ -30,6 +78,10 @@ interface ICSysInfo : IDispatch{
 	[propget, id(1)] HRESULT CeipIsOptedIn([out, retval] SHORT* pVal);
 	[id(2)] HRESULT GetComputerNameEx([in] eComputerNameFormat nameFormat, [out, retval] BSTR* pbsComputerName);
 	[id(3)] HRESULT DnsHostnameToComputerName([in] BSTR bsHostName, [out, retval] BSTR* pbsComputerName);
+	[id(4)] HRESULT GetComputerName([out, retval] BSTR* pbsComputerName);
+	[id(5)] HRESULT GetComputerObjectName([in] eExtendedNameFormat nameFormat, [out, retval] BSTR* pbsComputerName);
+	[id(6)] HRESULT GetCurrentHwProfile([out, retval] ICHwProfileInfo** ppHwProfileInfo);
+	[id(7)] HRESULT GetSystemInfo([out, retval] ICSystemInfo** ppSystemInfo);
 };
 [
 	uuid(7812BA73-C995-48B0-A9C6-C8D6790A5FFB),
@@ -44,6 +96,20 @@ library CWinSysInfoLib
 	coclass CSysInfo
 	{
 		[default] interface ICSysInfo;
+	};
+	[
+		uuid(909AD1BD-B76A-4F77-8563-CC253B5AAD30)		
+	]
+	coclass CHwProfileInfo
+	{
+		[default] interface ICHwProfileInfo;
+	};
+	[
+		uuid(5392ADC5-37BD-473C-9B9F-6E99B2081542)		
+	]
+	coclass CSystemInfo
+	{
+		[default] interface ICSystemInfo;
 	};
 };
 

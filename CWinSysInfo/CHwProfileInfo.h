@@ -1,4 +1,4 @@
-// CSysInfo.h : Declaration of the CCSysInfo
+// CHwProfileInfo.h : Declaration of the CCHwProfileInfo
 
 #pragma once
 #include "resource.h"       // main symbols
@@ -6,6 +6,7 @@
 
 
 #include "CWinSysInfo_i.h"
+#include "comutil.h"
 
 
 
@@ -16,26 +17,25 @@
 using namespace ATL;
 
 
-// CCSysInfo
+// CCHwProfileInfo
 
-class ATL_NO_VTABLE CCSysInfo :
+class ATL_NO_VTABLE CCHwProfileInfo :
 	public CComObjectRootEx<CComMultiThreadModel>,
-	public CComCoClass<CCSysInfo, &CLSID_CSysInfo>,
-	public IDispatchImpl<ICSysInfo, &IID_ICSysInfo, &LIBID_CWinSysInfoLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public CComCoClass<CCHwProfileInfo, &CLSID_CHwProfileInfo>,
+	public IDispatchImpl<ICHwProfileInfo, &IID_ICHwProfileInfo, &LIBID_CWinSysInfoLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CCSysInfo()
-		: mshCeipIsOptedIn(0)
-		, mbLoadedCeipIsOptedIn(false)
+	CCHwProfileInfo()
+		: mulDockInfo(0)
 	{
 		m_pUnkMarshaler = NULL;
 	}
 
-DECLARE_REGISTRY_RESOURCEID(IDR_CSYSINFO)
+DECLARE_REGISTRY_RESOURCEID(IDR_CHWPROFILEINFO)
 
 
-BEGIN_COM_MAP(CCSysInfo)
-	COM_INTERFACE_ENTRY(ICSysInfo)
+BEGIN_COM_MAP(CCHwProfileInfo)
+	COM_INTERFACE_ENTRY(ICHwProfileInfo)
 	COM_INTERFACE_ENTRY(IDispatch)
 	COM_INTERFACE_ENTRY_AGGREGATE(IID_IMarshal, m_pUnkMarshaler.p)
 END_COM_MAP()
@@ -62,17 +62,14 @@ public:
 
 
 
-	STDMETHOD(get_CeipIsOptedIn)(SHORT* pVal);
+	STDMETHOD(get_DockInfo)(ULONG* pVal);
+	STDMETHOD(get_HwProfileGuid)(BSTR* pVal);
+	STDMETHOD(get_HwProfileName)(BSTR* pVal);
+	STDMETHOD(Initialise)(ULONG ulDockInfo, BSTR bsHwProfileGuid, BSTR bsHwProfileName);
 private:
-	short mshCeipIsOptedIn;
-	bool mbLoadedCeipIsOptedIn;
-public:
-	STDMETHOD(GetComputerNameEx)(eComputerNameFormat nameFormat, BSTR* pbsComputerName);
-	STDMETHOD(DnsHostnameToComputerName)(BSTR bsHostName, BSTR* pbsComputerName);
-	STDMETHOD(GetComputerName)(BSTR* pbsComputerName);
-	STDMETHOD(GetComputerObjectName)(eExtendedNameFormat nameFormat, BSTR* pbsComputerName);
-	STDMETHOD(GetCurrentHwProfile)(ICHwProfileInfo** ppHwProfileInfo);
-	STDMETHOD(GetSystemInfo)(ICSystemInfo** ppSystemInfo);
+	unsigned long mulDockInfo;
+	_bstr_t mbsHwProfileGuid;
+	_bstr_t mbsHwProfileName;
 };
 
-OBJECT_ENTRY_AUTO(__uuidof(CSysInfo), CCSysInfo)
+OBJECT_ENTRY_NON_CREATEABLE_EX_AUTO(__uuidof(CHwProfileInfo), CCHwProfileInfo)
